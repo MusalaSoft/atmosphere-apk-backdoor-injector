@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.source.example" platformBuildVersionCode="22" platformBuildVersionName="5.1.1-1819727">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-feature android:glEsVersion="0x20000" android:required="true"/>
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+    <application android:allowBackup="true" android:hardwareAccelerated="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:name="com.source.example.App" android:theme="@style/Theme.Batman">
+        <meta-data android:name="com.source.app.ConsumerKey" android:value="@string/oauth2_consumer_key"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.source.example.OauthWebViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="authorize" android:scheme="sourceauth"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.source.example.ContactsActivity"/>
+        <activity android:label="@string/app_name" android:name="com.source.example.BrowsableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.source.common.app.SelectPhotoConfirmActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name="com.source.example.fragments.recyclerviewdemo.RecyclerViewActivity"/>
+        <service android:name="com.source.radar.services.RadarBootService"/>
+        <service android:name="com.source.radar.services.RadarLocationClientFireService"/>
+        <service android:name="com.source.radar.services.RadarBackupTimer"/>
+        <receiver android:name="com.source.radar.receivers.ReceiverRadarLocationClientFire"/>
+        <receiver android:name="com.source.radar.receivers.ReceiverRadarBackupTimerFire"/>
+        <receiver android:name="com.source.radar.receivers.ReceiverRadarBootFire"/>
+        <service android:name="com.source.example.services.UserAndSettingsFetchService"/>
+        <service android:name="com.source.example.services.AttachPhotoToTipService"/>
+        <service android:name="com.source.example.services.SharesourceObjectService"/>
+        <service android:name="com.source.example.services.ContactsSyncService"/>
+        <service android:name="com.source.example.services.CheckInIntentService"/>
+        <service android:name="com.source.example.services.LikeService"/>
+        <service android:name="com.htc.blinkfeed.service.BlinkFeedPluginService">
+            <intent-filter>
+                <action android:name="com.htc.opensense.social.SocialPlugin"/>
+            </intent-filter>
+            <meta-data android:name="plugin" android:value="com.source.example.services.BlinkFeedPluginService"/>
+        </service>
+        <receiver android:name="com.source.example.receivers.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.source.example.services.GcmService"/>
+        <activity android:label="RecyclerViewTestActivity" android:name="android.support.v7.widget.TestActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:name="com.twitter.sdk.android.core.identity.OAuthActivity"/>
+    </application>
+</manifest>
