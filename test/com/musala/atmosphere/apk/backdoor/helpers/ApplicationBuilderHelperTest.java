@@ -11,7 +11,7 @@ import com.musala.atmosphere.apk.backdoor.test.helpers.ExtendedTestUtility;
 
 /**
  * Tests see "{@link ApplicationBuilderHelper}.
- * 
+ *
  * @author boris.strandjev
  */
 public class ApplicationBuilderHelperTest {
@@ -39,9 +39,7 @@ public class ApplicationBuilderHelperTest {
         File targetApkPath = new File(TMP_FOLDER, "build.apk");
         buildHelper.compileApplication(TMP_FOLDER, "ApplicationOnlyProject", targetApkPath);
         File expectedSignedApk = new File(FIXTURE_LOCATION, "build_test/build.apk");
-        ExtendedTestUtility.assertBinaryFilesEqual("Expected correct apk to be built.",
-                                                   expectedSignedApk,
-                                                   targetApkPath);
+        ExtendedTestUtility.assertContainsFile("Expected correct apk to be built.", expectedSignedApk, targetApkPath);
     }
 
     @Test
@@ -56,6 +54,6 @@ public class ApplicationBuilderHelperTest {
         ApplicationBuilderHelper buildHelper = new ApplicationBuilderHelper();
         buildHelper.signApk(apkToSign, keystorePath, keystorePassword);
         File expectedSignedApk = new File(FIXTURE_LOCATION, "sign_tests/signed.apk");
-        ExtendedTestUtility.assertBinaryFilesEqual("Expected correct signed apk.", expectedSignedApk, apkToSign);
+        ExtendedTestUtility.assertContainsFile("Expected correct signed apk.", expectedSignedApk, apkToSign);
     }
 }

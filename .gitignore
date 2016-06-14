@@ -1,0 +1,7 @@
+# Temp folders created during tests
+backdooring_tmp_dir/
+debuggable_web_views_tmp_dir/
+test_apk_tool_tmp/
+
+# Debuggable APKs created during tests
+/fixtures/apk_backdoor/*-debuggable.apk

@@ -12,7 +12,7 @@ import com.musala.atmosphere.apk.backdoor.helpers.FileSystemHelper;
 
 /**
  * A helper class for the tests. Contains auxiliary assert functions.
- * 
+ *
  * @author boris.strandjev
  */
 public class ExtendedTestUtility {
@@ -21,7 +21,7 @@ public class ExtendedTestUtility {
 
     /**
      * Checks whether the two given files have the same content.
-     * 
+     *
      * @param message
      *        - the message to display if the check fails
      * @param expectedFile
@@ -37,7 +37,7 @@ public class ExtendedTestUtility {
 
     /**
      * Checks whether the two given binary files have the same content.
-     * 
+     *
      * @param message
      *        - the message to display if the check fails
      * @param expectedFile
@@ -64,8 +64,51 @@ public class ExtendedTestUtility {
     }
 
     /**
+     * Checks whether the expected file is larger than the actual one.
+     *
+     * @param message
+     *        - the message to display if the check fails
+     * @param expectedFile
+     *        - the file with the expected content
+     * @param actualFile
+     *        - the actual file
+     */
+    public static void assertIsLargerFile(String message, File expectedFile, File actualFile) {
+        assertTrue("Expected the file to exist.", actualFile.exists());
+        boolean isExpectedFileLarger = expectedFile.length() > actualFile.length();
+        assertTrue(message + ": Expected the file to be larger than the old file.", isExpectedFileLarger);
+    }
+
+    /**
+     * Checks whether the expected file contains the actual file at the beginning.
+     *
+     * @param message
+     *        - the message to display if the check fails
+     * @param expectedFile
+     *        - the file with the expected content
+     * @param actualFile
+     *        - the actual file
+     */
+    public static void assertContainsFile(String message, File expectedFile, File actualFile) throws IOException {
+        assertTrue("Expected the file to exist.", actualFile.exists());
+
+        try (BufferedInputStream expectedStream = new BufferedInputStream(new FileInputStream(expectedFile));
+                BufferedInputStream actualStream = new BufferedInputStream(new FileInputStream(actualFile))) {
+            int nextExpectedByte, nextActualByte;
+            int byteIndex = 0;
+            while ((nextExpectedByte = expectedStream.read()) > 0) {
+                nextActualByte = actualStream.read();
+                assertEquals(message + ": The byte at position " + byteIndex + " is expected to be correct.",
+                             nextExpectedByte,
+                             nextActualByte);
+                byteIndex++;
+            }
+        }
+    }
+
+    /**
      * Compares two strings ignoring the whitespaces.
-     * 
+     *
      * @param message
      *        - the message to display if the check fails
      * @param expectedString
@@ -81,7 +124,7 @@ public class ExtendedTestUtility {
 
     /**
      * Compares two directory structures recursively including the file contents.
-     * 
+     *
      * @param expectedDirectoryPath
      *        - the path to the root of the expected directory structure
      * @param actualDirectoryPath
@@ -94,7 +137,7 @@ public class ExtendedTestUtility {
 
     /**
      * Compares two directory structures recursively including the file contents.
-     * 
+     *
      * @param expectedDirectory
      *        - the root of the expected directory structure
      * @param actualDirectory
@@ -115,7 +158,7 @@ public class ExtendedTestUtility {
 
     /**
      * Compares two directory structures recursively including the file contents.
-     * 
+     *
      * @param expectedDirectory
      *        - the root of the expected directory structure
      * @param actualDirectory

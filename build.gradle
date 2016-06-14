@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+version = '0.0.1'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'APKBackdoorInjector',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+dependencies {
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.freemarker:freemarker:2.3.23'
+    compile name: 'apktool'
+
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+    main.java.srcDir 'src'
+    test.java.srcDir 'test'
+}
+
+publishing {
+    publications {
+        apkBackdoorInjector(MavenPublication) {
+            groupId 'com.musala.atmosphere'
+            artifactId 'apkbackdoorinjector'
+            version version
+
+            from components.java
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class"
+}

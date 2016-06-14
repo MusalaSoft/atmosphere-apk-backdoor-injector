@@ -7,13 +7,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import brut.androlib.AndrolibException;
-
 import com.musala.atmosphere.apk.backdoor.test.helpers.ExtendedTestUtility;
+
+import brut.androlib.AndrolibException;
 
 /**
  * Tests {@link ApkToolHelper}.
- * 
+ *
  * @author boris.strandjev
  */
 public class ApkToolHelperTest {
@@ -63,9 +63,19 @@ public class ApkToolHelperTest {
         apkToolHelper.compileBackSmaliCode(decompiledFolderPath, compiledBackApkPath);
 
         File expectedCompiledBackApk = new File(FIXTURE_LOCATION, "recompiled/compiledBack.apk");
-        ExtendedTestUtility.assertBinaryFilesEqual("Expected correct apk.",
-                                                   expectedCompiledBackApk,
-                                                   compiledBackApkPath);
+
+        /*
+         * Tests if the injected APK file is larger than the old file and
+         * if it contains the old file at the beginning (checked byte by byte).
+         * This is working with the current version of the android command line tool
+         * but this behavior might change in the future and this test might need to be fixed.
+         */
+        ExtendedTestUtility.assertIsLargerFile("Expected correct apk.",
+                                               expectedCompiledBackApk,
+                                               compiledBackApkPath);
+        ExtendedTestUtility.assertContainsFile("Expected correct apk.",
+                                               expectedCompiledBackApk,
+                                               compiledBackApkPath);
     }
 
 }
