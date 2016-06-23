@@ -25,11 +25,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-sourceSets {
-    main.java.srcDir 'src'
-    test.java.srcDir 'test'
-}
-
 publishing {
     publications {
         apkBackdoorInjector(MavenPublication) {
@@ -49,4 +44,8 @@ publishing {
 tasks.withType(Test) {
     scanForTestClasses = false
     include "**/*Test.class"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
 }
