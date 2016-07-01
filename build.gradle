@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 version = '0.0.1'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'APKBackdoorInjector',
+        attributes 'Implementation-Title': 'Atmosphere APK Backdoor Injector',
                    'Implementation-Version': version
     }
 }
@@ -27,9 +27,9 @@ dependencies {
 
 publishing {
     publications {
-        apkBackdoorInjector(MavenPublication) {
+        atmosphereApkBackdoorInjector(MavenPublication) {
             groupId 'com.musala.atmosphere'
-            artifactId 'apkbackdoorinjector'
+            artifactId 'atmosphere-apk-backdoor-injector'
             version version
 
             from components.java
