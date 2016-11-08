@@ -1,3 +1,5 @@
+See our site for better context of this readme. [Click here](http://atmosphereframework.com/)
+
 # atmosphere-apk-backdoor-injector
 The Android OS requires WebView debugging to be manually enabled in every Android app whose WebViews we would like to be able to debug by calling the static method [`setWebContentsDebuggingEnabled`][1] like this:
 ``` java
